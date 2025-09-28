@@ -66,15 +66,20 @@ const ChatbotPage = () => {
   const [showPlanSelection, setShowPlanSelection] = useState(false);
 
   const mentalHealthIssues = [
-    { id: 'anxiety', name: 'Anxiety', icon: Brain, color: 'from-blue-500 to-cyan-500', description: 'Worry, fear, and nervousness' },
-    { id: 'depression', name: 'Depression', icon: Heart, color: 'from-purple-500 to-pink-500', description: 'Sadness, hopelessness, low mood' },
-    { id: 'stress', name: 'Stress', icon: Target, color: 'from-orange-500 to-red-500', description: 'Overwhelm and pressure' },
-    { id: 'motivation', name: 'Low Motivation', icon: TrendingDown, color: 'from-gray-500 to-gray-600', description: 'Lack of drive and energy' },
-    { id: 'relationships', name: 'Relationship Issues', icon: Users, color: 'from-green-500 to-teal-500', description: 'Interpersonal difficulties' }
+    { id: 'anxiety-disorders', name: 'Anxiety Disorders', icon: Brain, color: 'from-blue-500 to-cyan-500', description: 'Persistent worry, fear, and panic' },
+    { id: 'depression', name: 'Depression & Low Mood', icon: Heart, color: 'from-purple-500 to-pink-500', description: 'Sadness, hopelessness, and low energy' },
+    { id: 'stress', name: 'Stress & Burnout', icon: Target, color: 'from-orange-500 to-red-500', description: 'Overwhelm, exhaustion, and pressure' },
+    { id: 'insomnia', name: 'Insomnia & Sleep Problems', icon: Moon, color: 'from-indigo-500 to-purple-500', description: 'Difficulty sleeping and rest issues' },
+    { id: 'trauma', name: 'Trauma & PTSD', icon: Shield, color: 'from-red-500 to-pink-500', description: 'Past traumatic experiences and their effects' },
+    { id: 'self-esteem', name: 'Low Self-Esteem & Self-Doubt', icon: Users, color: 'from-green-500 to-teal-500', description: 'Negative self-perception and confidence issues' },
+    { id: 'emotional-dysregulation', name: 'Emotional Dysregulation', icon: Heart, color: 'from-pink-500 to-rose-500', description: 'Difficulty managing intense emotions' },
+    { id: 'negative-thoughts', name: 'Negative Thought Patterns & Overthinking', icon: Brain, color: 'from-gray-500 to-slate-500', description: 'Repetitive negative thinking and rumination' },
+    { id: 'social-anxiety', name: 'Social Anxiety', icon: Users, color: 'from-cyan-500 to-blue-500', description: 'Fear and discomfort in social situations' },
+    { id: 'adjustment', name: 'Adjustment & Identity Issues', icon: Target, color: 'from-teal-500 to-green-500', description: 'Life transitions and identity concerns' }
   ];
 
   const questionnaires = {
-    anxiety: [
+    'anxiety-disorders': [
       { id: '1', text: 'How often do you experience anxiety in a typical week? (Please describe in detail)', type: 'text', required: true },
       { id: '2', text: 'Do you experience physical symptoms like sweating, rapid heartbeat, or trembling? Please describe what you feel.', type: 'text', required: true },
       { id: '3', text: 'Which situations typically trigger your anxiety? Please list them.', type: 'text', required: true },
@@ -275,7 +280,14 @@ const ChatbotPage = () => {
       'sleep problems': ['mindfulness', 'music', 'video', 'stress'],
       addiction: ['cbt', 'mindfulness', 'video', 'stress'],
       'low motivation': ['gratitude', 'cbt', 'video', 'act'],
-      'relationship issues': ['video', 'cbt', 'act', 'art']
+      'relationship issues': ['video', 'cbt', 'act', 'art'],
+      'insomnia & sleep problems': ['mindfulness', 'music', 'video', 'stress'],
+      'trauma & ptsd': ['video', 'mindfulness', 'cbt', 'art'],
+      'low self-esteem & self-doubt': ['cbt', 'gratitude', 'video', 'act'],
+      'emotional dysregulation': ['mindfulness', 'cbt', 'video', 'art'],
+      'negative thought patterns & overthinking': ['cbt', 'mindfulness', 'video', 'exposure'],
+      'social anxiety': ['exposure', 'cbt', 'video', 'mindfulness'],
+      'adjustment & identity issues': ['video', 'cbt', 'act', 'gratitude']
     };
 
     const moduleIds = baseRecommendations[issue] || ['cbt', 'mindfulness', 'video'];
@@ -453,7 +465,7 @@ const ChatbotPage = () => {
                 }`}>
                   What would you like help with today?
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                   {mentalHealthIssues.map((issue) => (
                     <motion.button
                       key={issue.id}
@@ -726,7 +738,7 @@ const ChatbotPage = () => {
         }`}>
           <div className="flex flex-wrap gap-2 justify-center">
             <button
-              onClick={() => startAssessment('anxiety')}
+              onClick={() => startAssessment('anxiety-disorders')}
               className="px-3 py-1 bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full text-sm hover:from-purple-600 hover:to-blue-600 transition-all duration-300"
             >
               Start Assessment
